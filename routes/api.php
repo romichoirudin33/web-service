@@ -17,13 +17,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 	return $request->user();
 });
 
-//route posts
-Route::get('posts', function (){
-	//model dari database
-	return App\Posts::all();
-});
-
-Route::get('posts/{id}', function($id){
-	//get satu data dari database
-	return App\Posts::where('id', $id)->first();
-});
+//route tabel posts
+Route::get('posts', 'ApiPostsController@index');
+Route::get('posts/{id}', 'ApiPostsController@show');
+Route::post('posts', 'ApiPostsController@store');
+Route::put('posts/{id}', 'ApiPostsController@update');
+Route::delete('posts/{id}', 'ApiPostsController@destroy');
